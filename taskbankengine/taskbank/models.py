@@ -11,7 +11,7 @@ class Task(models.Model):
 	date_pub = models.DateTimeField(auto_now_add=True)
 
 	class Meta:
-		#Переобьявляют порядок сортировки по убыванию
+		#Переобъявить порядок сортировки по убыванию
 		ordering = ['-date_pub'] 
 
 	def __str__(self):

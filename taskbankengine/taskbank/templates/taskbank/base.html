@@ -31,11 +31,17 @@
       <li class="nav-item active">
         <a class="nav-link" href="#">Аккаунт <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+      {% if request.user.is_authenticated %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
       </li>
+      {% else %}
+       <li class="nav-item active">
+        <a class="nav-link" href="{% url 'login' %}">Войти</a>
+      </li>
+      {% endif %}
       <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -46,20 +52,23 @@
 </nav>
   {% block content%} {% endblock %}
   
+
 <nav aria-label="...">
   <ul class="pagination pagination-sm">
-  	{% for n in tasks.paginator.page_range %}
-  	{% if n == tasks.number %}
+  	{% for n in paginator.page_range %}
+  	{% if n ==  page_obj.number %}
     <li class="page-item active" aria-current="page">
       <span class="page-link">
         {{ n }}
         <span class="sr-only">(current)</span>
       </span>
     </li>
-    {% elif  n > tasks.number|add:-3 and n < tasks.number|add:3 %}
+    {% elif  n >  page_obj.number|add:-3 and n <  page_obj.number|add:3 %}
     <li class="page-item"><a class="page-link" href="?page={{ n }}"> {{ n }} </a></li>
     {% endif %}
     {% endfor %}
+
+  
 
   </ul>
 </nav>

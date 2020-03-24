@@ -3,6 +3,7 @@ from .views import *
 
 
 urlpatterns = [
-	path('', bank_list, name="bank_list_url"),
-	path('<str:slug>/', task_detail, name="task_detail_url")
+	path('', TasksListView.as_view(), name="bank_list_url"),
+	path('task/<str:slug>/', TaskDetailView.as_view(), name="task_detail_url"),
+
 ]
