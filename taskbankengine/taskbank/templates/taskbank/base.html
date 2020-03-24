@@ -44,8 +44,8 @@
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" action="{% url 'bank_list_url' %}">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
@@ -55,15 +55,15 @@
 
 <nav aria-label="...">
   <ul class="pagination pagination-sm">
-  	{% for n in paginator.page_range %}
-  	{% if n ==  page_obj.number %}
+  	{% for n in tasks.paginator.page_range %}
+  	{% if n ==  tasks.number %}
     <li class="page-item active" aria-current="page">
       <span class="page-link">
         {{ n }}
         <span class="sr-only">(current)</span>
       </span>
     </li>
-    {% elif  n >  page_obj.number|add:-3 and n <  page_obj.number|add:3 %}
+    {% elif  n >  tasks.number|add:-3 and n <  tasks.number|add:3 %}
     <li class="page-item"><a class="page-link" href="?page={{ n }}"> {{ n }} </a></li>
     {% endif %}
     {% endfor %}
